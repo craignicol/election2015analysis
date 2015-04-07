@@ -9,10 +9,11 @@ with open(headlinesfilename) as f:
         if len(content) > 0:
             counts['_'] += 1
             words = content.split()
-            for word in words:
+            for casedword in words:
+                word = casedword.lower()
                 if word not in counts:
                     counts[word] = 0
                 counts[word] += 1
             
-interestingcounts = {counts             
-print counts
+interestingcounts = {k: v for k, v in counts.iteritems() if v > 1}          
+print sorted(interestingcounts.items(), key=lambda x: x[1], reverse=True)
